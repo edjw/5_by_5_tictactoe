@@ -156,6 +156,7 @@ for (let index = 0; index < gridTotalSize; index++) {
 function resetGridArray() {
     gridArray.set(gridArrayBuilder);
     playerScores.reset();
+    turn.set("X");
 }
 
 /**
