@@ -53,7 +53,7 @@
 <!-- Todo: apply lines over the buttons "top_bottom"|"top_left_bottom_right"|"left_right"|"bottom_left_top_right" -->
 
 <div
-	class="flex items-center justify-center w-12 h-12 border rounded my-2 md:my-1 mx-2 md:mx-1
+	class="flex items-center justify-center w-12 h-12 border rounded my-0.5 md:my-1 mx-2 md:mx-1
     {squareData.value === 'X' ? 'bg-red-400 border-red-900' : ''}
     {squareData.value === 'O' ? 'bg-blue-400 border-blue-900' : ''}"
 >
