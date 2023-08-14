@@ -1,34 +1,31 @@
 <script>
-	import { gridArray, gridSize } from "$lib/store/store";
-	import GridItem from "$lib/components/gridItem.svelte";
-	import Rules from "$lib/components/rules.svelte";
-	import Turn from "$lib/components/turn.svelte";
-	import ResetGameButton from "$lib/components/resetGameButton.svelte";
-	import PlayerScoresTable from "$lib/components/playerScoresTable.svelte";
+	let games = [
+		{
+			title: "123",
+			link: "/123",
+			description: "1 point for a line of 3, 2 for 4, 3 for 5"
+		},
+		{
+			title: "135",
+			link: "/135",
+			description: "1 point for a line of 3, 3 for 4, 5 for 5 (best so far)"
+		},
+		{
+			title: "1357",
+			link: "/1357",
+			description: "1 point for a line of 2, 3 for 3, 5 for 4, 7 for 5"
+		}
+	];
 </script>
 
-<Rules>
-	<p>1 points for a line of 3</p>
-	<p>2 points for a line of 4</p>
-	<p>3 points for a line of 5</p>
-</Rules>
-
-<div class="flex flex-col mt-8">
-	<Turn />
-
-	<section class={`grid grid-cols-${gridSize} content-center justify-items-center min-w-md mt-8`}>
-		{#each $gridArray as squareData}
-			<GridItem
-				{squareData}
-				twoMultiplier={0}
-				threeMultiplier={1}
-				fourMultiplier={2}
-				fiveMultiplier={3}
-			/>
+<div class="flex flex-col px-4 space-y-8">
+	<h1 class="text-3xl">5-by-5 games</h1>
+	<nav class="flex flex-col space-y-6">
+		{#each games as game}
+			<section>
+				<a href={game.link} data-sveltekit-reload class="underline font-semibold text-xl">{game.title}</a>
+				<p>{game.description}</p>
+			</section>
 		{/each}
-	</section>
-
-	<ResetGameButton />
-
-	<PlayerScoresTable />
+	</nav>
 </div>

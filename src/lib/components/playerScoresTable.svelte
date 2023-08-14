@@ -2,9 +2,9 @@
 	import { playerScores } from "$lib/store/store";
 </script>
 
-<section class="flex flex-col space-y-4 mt-8">
+<section class="grid grid-cols-2 space-x-4 mt-8">
 	{#each Object.entries($playerScores) as [player, scores]}
-		<div class="flex flex-col">
+		<div class="flex flex-col space-y-0.5">
 			<p class="font-semibold">
 				{player}
 			</p>

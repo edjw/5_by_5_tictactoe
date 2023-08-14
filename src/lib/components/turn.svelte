@@ -2,4 +2,6 @@
 	import { turn } from "$lib/store/store";
 </script>
 
-<p class="text-center">{$turn}'s turn</p>
+<section class="self-center mt-4">
+	<p class="text-5xl text-center">{$turn}</p>
+</section>
