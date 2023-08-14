@@ -24,6 +24,7 @@ function resetPlayerScores() {
         "X": {
             score: 0,
             lines: {
+                "twos": 0,
                 "threes": 0,
                 "fours": 0,
                 "fives": 0
@@ -32,6 +33,7 @@ function resetPlayerScores() {
         "O": {
             score: 0,
             lines: {
+                "twos": 0,
                 "threes": 0,
                 "fours": 0,
                 "fives": 0
@@ -41,9 +43,9 @@ function resetPlayerScores() {
 }
 
 
-function updatePlayerScore(scoreObj, fourMultiplier = 2, fiveMultiplier = 3) {
+function updatePlayerScore(scoreObj, twoMultiplier = 0, threeMultiplier = 1, fourMultiplier = 2, fiveMultiplier = 3) {
     // Extract properties from scoreObj
-    const { player, threes = 0, fours = 0, fives = 0 } = scoreObj;
+    const { player, twos = 0, threes = 0, fours = 0, fives = 0 } = scoreObj;
 
 
     if (!player || !["X", "O"].includes(player)) {
@@ -57,12 +59,15 @@ function updatePlayerScore(scoreObj, fourMultiplier = 2, fiveMultiplier = 3) {
             return scores;
         }
 
+        scores[player].lines["twos"] = twos;
         scores[player].lines["threes"] = threes;
         scores[player].lines["fours"] = fours;
         scores[player].lines["fives"] = fives;
 
         // Now, calculate the score based on line counts
-        scores[player].score = threes +
+        scores[player].score =
+            (twoMultiplier * twos) +
+            (threeMultiplier * threes) +
             (fourMultiplier * fours) +
             (fiveMultiplier * fives);
 
@@ -75,6 +80,7 @@ export const playerScores = Object.assign(writable({
     "X": {
         score: 0,
         lines: {
+            "twos": 0,
             "threes": 0,
             "fours": 0,
             "fives": 0
@@ -83,6 +89,7 @@ export const playerScores = Object.assign(writable({
     "O": {
         score: 0,
         lines: {
+            "twos": 0,
             "threes": 0,
             "fours": 0,
             "fives": 0

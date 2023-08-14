@@ -1,9 +1,8 @@
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vitest/config";
-import { webSocketServer } from "./webSocket.js";
 
 export default defineConfig({
-	plugins: [sveltekit(), webSocketServer],
+	plugins: [sveltekit()],
 	test: {
 		include: ["src/**/*.{test,spec}.{js,ts}"]
 	}

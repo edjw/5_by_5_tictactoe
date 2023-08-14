@@ -3,13 +3,23 @@
 	import GridItem from "$lib/components/gridItem.svelte";
 </script>
 
-<div class="flex flex-col">
+<slot name="rules">
+	<p>1 points for a line of 3</p>
+	<p>3 points for a line of 4</p>
+	<p>5 points for a line of 5</p>
+</slot>
+<div class="flex flex-col mt-8">
 	<p class="text-center">{$turn}'s turn</p>
 
 	<section class={`grid grid-cols-${gridSize} content-center justify-items-center min-w-md mt-8`}>
-		<!-- <section class="grid grid-cols-5 content-center justify-items-center min-w-md"> -->
 		{#each $gridArray as squareData}
-			<GridItem {squareData} fourMultiplier={3} fiveMultiplier={5} />
+			<GridItem
+				{squareData}
+				twoMultiplier={0}
+				threeMultiplier={1}
+				fourMultiplier={3}
+				fiveMultiplier={5}
+			/>
 		{/each}
 	</section>
 
@@ -32,6 +42,4 @@
 			</div>
 		{/each}
 	</section>
-
-	<!-- {JSON.stringify($gridArray)} -->
 </div>

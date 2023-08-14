@@ -2,9 +2,10 @@
 	import { turn, gridArray, playerScores } from "$lib/store/store";
 
 	export let squareData;
+	export let twoMultiplier = 0;
+	export let threeMultiplier = 1;
 	export let fourMultiplier = 2;
 	export let fiveMultiplier = 3;
-
 
 	/**
 	 * @typedef { "X" | "O" | null } SquareValue
@@ -85,7 +86,7 @@
 				];
 
 				for (const direction of directions) {
-					for (let length = 5; length >= 3; length--) {
+					for (let length = 5; length >= 2; length--) {
 						const line = checkLine(matrix, i, j, direction.dx, direction.dy, length, player);
 						if (line) {
 							allLines.push(line);
@@ -133,6 +134,7 @@
 		const filteredLines = filterLines(lines);
 
 		const counts = {
+			twos: 0,
 			threes: 0,
 			fours: 0,
 			fives: 0,
@@ -141,6 +143,9 @@
 
 		filteredLines.forEach((line) => {
 			switch (line.line.length) {
+				case 2:
+					counts.twos++;
+					break;
 				case 3:
 					counts.threes++;
 					break;
@@ -178,7 +183,13 @@
 		const currentPlayerScore = countAllLinesForPlayer($gridArray, $turn);
 
 		// Update playerScores based on the current player and their score
-		playerScores.updatePlayerScore(currentPlayerScore, fourMultiplier, fiveMultiplier);
+		playerScores.updatePlayerScore(
+			currentPlayerScore,
+			twoMultiplier,
+			threeMultiplier,
+			fourMultiplier,
+			fiveMultiplier
+		);
 
 		// Switch the turn to the other player
 		turn.update((value) => (value === "X" ? "O" : "X"));
@@ -188,10 +199,9 @@
 <!-- Todo: apply lines over the buttons "top_bottom"|"top_left_bottom_right"|"left_right"|"bottom_left_top_right" -->
 
 <div
-	class={`flex items-center justify-center w-12 h-12 m-0.5 border rounded
-${squareData.value === "X" && "bg-red-400 border-red-900"}
-${squareData.value === "O" && "bg-blue-400 border-blue-900"}
-`}
+	class="flex items-center justify-center w-12 h-12 m-0.5 border rounded
+    {squareData.value === 'X' ? 'bg-red-400 border-red-900' : ''}
+    {squareData.value === 'O' ? 'bg-blue-400 border-blue-900' : ''}"
 >
 	<button
 		class={`w-full h-full`}

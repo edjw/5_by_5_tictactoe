@@ -4,9 +4,10 @@
 </script>
 
 <slot name="rules">
-	<p>1 points for a line of 3</p>
-	<p>3 points for a line of 4</p>
-	<p>5 points for a line of 5</p>
+	<p>1 point for a line of 2</p>
+	<p>3 points for a line of 3</p>
+	<p>5 points for a line of 4</p>
+	<p>7 points for a line of 5</p>
 </slot>
 
 <div class="flex flex-col mt-8">
@@ -16,10 +17,10 @@
 		{#each $gridArray as squareData}
 			<GridItem
 				{squareData}
-				twoMultiplier={0}
-				threeMultiplier={1}
-				fourMultiplier={2}
-				fiveMultiplier={3}
+				twoMultiplier={1}
+				threeMultiplier={3}
+				fourMultiplier={5}
+				fiveMultiplier={7}
 			/>
 		{/each}
 	</section>
