@@ -12,6 +12,7 @@
 <div class="flex flex-col mt-8">
 	<Turn />
 	<GameGrid twoMultiplier={1} threeMultiplier={3} fourMultiplier={5} fiveMultiplier={7} />
+	<ResetGameButton />
 </div>
 
 <Rules>
@@ -20,7 +21,5 @@
 	<li>5 points for a line of 4</li>
 	<li>7 points for a line of 5</li>
 </Rules>
-
-<ResetGameButton />
 
 <PlayerScoresTable showTwos={true} />

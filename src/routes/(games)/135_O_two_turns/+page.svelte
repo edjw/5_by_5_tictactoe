@@ -18,6 +18,7 @@
 		fiveMultiplier={3}
 		twoGoesForOFirstTurn={true}
 	/>
+	<ResetGameButton />
 </div>
 <Rules>
 	<li>O can fill two squares on their first turn</li>
@@ -25,7 +26,5 @@
 	<li>3 points for a line of 4</li>
 	<li>5 points for a line of 5</li>
 </Rules>
-
-<ResetGameButton />
 
 <PlayerScoresTable />
