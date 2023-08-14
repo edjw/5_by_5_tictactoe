@@ -21,7 +21,7 @@
 <section class="flex flex-col md:self-start mx-2 mt-4 space-y-8">
 	<slot />
 
-	<label>
+	<label class="cursor-pointer">
 		<input type="checkbox" bind:checked={$showGridLettersNumbers} />
 		{$showGridLettersNumbers === true
 			? "Hide grid letters and numbers"
