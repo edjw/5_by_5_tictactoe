@@ -15,10 +15,10 @@
 </div>
 
 <Rules>
-	<p>1 point for a line of 2</p>
-	<p>3 points for a line of 3</p>
-	<p>5 points for a line of 4</p>
-	<p>7 points for a line of 5</p>
+	<li>1 point for a line of 2</li>
+	<li>3 points for a line of 3</li>
+	<li>5 points for a line of 4</li>
+	<li>7 points for a line of 5</li>
 </Rules>
 
 <ResetGameButton />

@@ -20,10 +20,10 @@
 	/>
 </div>
 <Rules>
-	<p>1 points for a line of 3</p>
-	<p>3 points for a line of 4</p>
-	<p>5 points for a line of 5</p>
-	<p>O can fill two squares on their first turn</p>
+	<li>O can fill two squares on their first turn</li>
+	<li>1 points for a line of 3</li>
+	<li>3 points for a line of 4</li>
+	<li>5 points for a line of 5</li>
 </Rules>
 
 <ResetGameButton />
