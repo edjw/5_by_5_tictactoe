@@ -3,29 +3,29 @@
 
 	import { page } from "$app/stores";
 
-	import { io } from "$lib/webSocketConnection.js";
-	import { onMount } from "svelte";
+	// import { io } from "$lib/webSocketConnection.js";
+	// import { onMount } from "svelte";
 
-	let textfield = "";
-	let username = "";
+	// let textfield = "";
+	// let username = "";
 
-	let messages = [];
-	onMount(() => {
-		io.on("message", (message) => {
-			messages = [...messages, message];
-		});
-		io.on("name", (name) => {
-			username = name;
-		});
-	});
+	// let messages = [];
+	// onMount(() => {
+	// 	io.on("message", (message) => {
+	// 		messages = [...messages, message];
+	// 	});
+	// 	io.on("name", (name) => {
+	// 		username = name;
+	// 	});
+	// });
 
-	function sendMessage() {
-		const message = textfield.trim();
-		if (!message) return;
+	// function sendMessage() {
+	// 	const message = textfield.trim();
+	// 	if (!message) return;
 
-		textfield = "";
-		io.emit("message", message);
-	}
+	// 	textfield = "";
+	// 	io.emit("message", message);
+	// }
 
 	// $: {
 	// 	// send message to server
@@ -43,7 +43,7 @@
 	<slot />
 </div>
 
-<div class="h-screen w-screen bg-zinc-800">
+<!-- <div class="h-screen w-screen bg-zinc-800">
 	<div class="h-full w-full max-w-md mx-auto bg-zinc-500 flex flex-col">
 		<header
 			class="px-6 py-4 border-b border-zinc-800 bg-zinc-700 text-white shrink-0 flex items-center justify-between"
@@ -78,4 +78,4 @@
 			<button type="submit" class="shrink-0 border border-white rounded-lg px-4 py-3">Send</button>
 		</form>
 	</div>
-</div>
+</div> -->
