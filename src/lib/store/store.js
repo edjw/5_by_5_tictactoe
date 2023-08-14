@@ -41,7 +41,10 @@ function resetPlayerScores() {
 }
 
 
-function updatePlayerScore({ player, threes = 0, fours = 0, fives = 0 }) {
+function updatePlayerScore(scoreObj, fourMultiplier = 2, fiveMultiplier = 3) {
+    // Extract properties from scoreObj
+    const { player, threes = 0, fours = 0, fives = 0 } = scoreObj;
+
 
     if (!player || !["X", "O"].includes(player)) {
         console.error("Invalid player:", player);
@@ -60,12 +63,13 @@ function updatePlayerScore({ player, threes = 0, fours = 0, fives = 0 }) {
 
         // Now, calculate the score based on line counts
         scores[player].score = threes +
-            (2 * fours) +
-            (3 * fives);
+            (fourMultiplier * fours) +
+            (fiveMultiplier * fives);
 
         return scores;
     });
 }
+
 
 export const playerScores = Object.assign(writable({
     "X": {

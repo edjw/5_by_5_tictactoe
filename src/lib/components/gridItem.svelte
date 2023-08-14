@@ -2,6 +2,9 @@
 	import { turn, gridArray, playerScores } from "$lib/store/store";
 
 	export let squareData;
+	export let fourMultiplier = 2;
+	export let fiveMultiplier = 3;
+
 
 	/**
 	 * @typedef { "X" | "O" | null } SquareValue
@@ -175,7 +178,7 @@
 		const currentPlayerScore = countAllLinesForPlayer($gridArray, $turn);
 
 		// Update playerScores based on the current player and their score
-		playerScores.updatePlayerScore(currentPlayerScore);
+		playerScores.updatePlayerScore(currentPlayerScore, fourMultiplier, fiveMultiplier);
 
 		// Switch the turn to the other player
 		turn.update((value) => (value === "X" ? "O" : "X"));
