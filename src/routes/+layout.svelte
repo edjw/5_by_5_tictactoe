@@ -34,8 +34,6 @@
 		>
 	</nav>
 	<section>
-		<p class="font-semibold">Rules</p>
-		<slot name="rules" />
+		<slot />
 	</section>
-	<slot />
 </div>

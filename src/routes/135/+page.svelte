@@ -1,15 +1,19 @@
 <script>
-	import { gridArray, playerScores, turn, gridSize } from "$lib/store/store";
+	import { gridArray, gridSize } from "$lib/store/store";
 	import GridItem from "$lib/components/gridItem.svelte";
+	import Rules from "$lib/components/rules.svelte";
+	import Turn from "$lib/components/turn.svelte";
+	import ResetGameButton from "$lib/components/resetGameButton.svelte";
+	import PlayerScoresTable from "$lib/components/playerScoresTable.svelte";
 </script>
 
-<slot name="rules">
+<Rules>
 	<p>1 points for a line of 3</p>
 	<p>3 points for a line of 4</p>
 	<p>5 points for a line of 5</p>
-</slot>
+</Rules>
 <div class="flex flex-col mt-8">
-	<p class="text-center">{$turn}'s turn</p>
+	<Turn />
 
 	<section class={`grid grid-cols-${gridSize} content-center justify-items-center min-w-md mt-8`}>
 		{#each $gridArray as squareData}
@@ -23,23 +27,6 @@
 		{/each}
 	</section>
 
-	<section class="mt-8">
-		<button class="border px-4 py-2 rounded" on:click={gridArray.reset}> Start again </button>
-	</section>
-
-	<section class="flex flex-col space-y-4 mt-8">
-		{#each Object.entries($playerScores) as [player, scores]}
-			<div class="flex flex-col">
-				<p class="font-semibold">
-					{player}
-				</p>
-				<p>Total score: {scores.score}</p>
-				{#each Object.entries(scores.lines) as [lineLength, number]}
-					<p>
-						{lineLength}: {number}
-					</p>
-				{/each}
-			</div>
-		{/each}
-	</section>
+	<ResetGameButton />
+	<PlayerScoresTable />
 </div>
