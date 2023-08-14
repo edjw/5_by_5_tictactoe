@@ -19,7 +19,7 @@
 	</div>
 	<!-- Main Grid -->
 	<div
-		class="col-start-2 col-span-5 row-start-2 row-span-5 grid grid-cols-5 content-center justify-items-center border"
+		class="col-start-2 col-span-5 row-start-2 row-span-5 grid grid-cols-5 content-center justify-items-center"
 	>
 		{#each $gridArray as squareData}
 			<GridItem
