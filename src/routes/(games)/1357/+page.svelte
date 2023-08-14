@@ -1,6 +1,6 @@
 <script>
 	import GameTitle from "$lib/components/gameTitle.svelte";
-	import Turn from "$lib/components/turn.svelte";
+
 	import Rules from "$lib/components/rules.svelte";
 	import GameGrid from "$lib/components/gameGrid.svelte";
 	import ResetGameButton from "$lib/components/resetGameButton.svelte";
@@ -10,7 +10,6 @@
 <GameTitle title={"1357"} />
 
 <div class="flex flex-col mt-8">
-	<Turn />
 	<GameGrid twoMultiplier={1} threeMultiplier={3} fourMultiplier={5} fiveMultiplier={7} />
 	<ResetGameButton />
 </div>
