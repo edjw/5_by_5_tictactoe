@@ -9,8 +9,6 @@
 
 <GameTitle title={"1357"} />
 
-<Turn />
-
 <div class="flex flex-col mt-8">
 	<Turn />
 	<GameGrid twoMultiplier={1} threeMultiplier={3} fourMultiplier={5} fiveMultiplier={7} />

@@ -1,5 +1,5 @@
 <script>
-	import { gridArray, playerScores, turn } from "$lib/store/store";
+	import { gridArray, numberOfTurnsTaken, playerScores, turn } from "$lib/store/store";
 
 	// Reset states when change game type
 	import { onMount } from "svelte";
@@ -8,6 +8,7 @@
 		gridArray.reset();
 		playerScores.reset();
 		turn.set("X");
+		numberOfTurnsTaken.set(0);
 	});
 </script>
 

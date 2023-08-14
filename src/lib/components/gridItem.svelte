@@ -1,11 +1,12 @@
 <script>
-	import { turn, gridArray, playerScores } from "$lib/store/store";
+	import { turn, gridArray, playerScores, numberOfTurnsTaken } from "$lib/store/store";
 
 	export let squareData;
 	export let twoMultiplier = 0;
 	export let threeMultiplier = 1;
 	export let fourMultiplier = 2;
 	export let fiveMultiplier = 3;
+	export let twoGoesForOFirstTurn = false;
 
 	/**
 	 * @typedef { "X" | "O" | null } SquareValue
@@ -191,8 +192,13 @@
 			fiveMultiplier
 		);
 
-		// Switch the turn to the other player
-		turn.update((value) => (value === "X" ? "O" : "X"));
+		// hack to allow the two Goes for O on first turn game. numberofTurnsTaken will be 1 for O's first turn, but not its second turn
+		if (twoGoesForOFirstTurn === false || $numberOfTurnsTaken !== 1) {
+			// Switch the turn to the other player
+			turn.update((value) => (value === "X" ? "O" : "X"));
+		}
+
+		numberOfTurnsTaken.update((value) => value + 1);
 	}
 </script>
 

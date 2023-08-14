@@ -14,6 +14,12 @@
 			title: "1357",
 			link: "/1357",
 			description: "1 point for a line of 2, 3 for 3, 5 for 4, 7 for 5"
+		},
+		{
+			title: "135, O plays twice on first turn",
+			link: "/135_O_two_turns",
+			description:
+				"1 point for a line of 3, 3 for 4, 5 for 5. O gets to fill two spaces on their first turn"
 		}
 	];
 </script>
@@ -23,7 +29,9 @@
 	<nav class="flex flex-col space-y-6">
 		{#each games as game}
 			<section>
-				<a href={game.link} data-sveltekit-reload class="underline font-semibold text-xl">{game.title}</a>
+				<a href={game.link} data-sveltekit-reload class="underline font-semibold text-xl"
+					>{game.title}</a
+				>
 				<p>{game.description}</p>
 			</section>
 		{/each}

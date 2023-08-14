@@ -8,6 +8,8 @@ import { writable } from 'svelte/store';
  */
 export const turn = writable("X");
 
+export const numberOfTurnsTaken = writable(0);
+
 
 
 // Player score state
@@ -168,6 +170,7 @@ function resetGridArray() {
     gridArray.set(gridArrayBuilder);
     playerScores.reset();
     turn.set("X");
+    numberOfTurnsTaken.set(0);
 }
 
 /**

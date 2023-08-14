@@ -6,12 +6,20 @@
 	export let threeMultiplier;
 	export let fourMultiplier;
 	export let fiveMultiplier;
+	export let twoGoesForOFirstTurn;
 </script>
 
 <section
 	class={`grid grid-cols-${gridSize} content-center justify-items-center min-w-md mt-8 border mx-8`}
 >
 	{#each $gridArray as squareData}
-		<GridItem {squareData} {twoMultiplier} {threeMultiplier} {fourMultiplier} {fiveMultiplier} />
+		<GridItem
+			{squareData}
+			{twoMultiplier}
+			{threeMultiplier}
+			{fourMultiplier}
+			{fiveMultiplier}
+			twoGoesForOFirstTurn={twoGoesForOFirstTurn}
+		/>
 	{/each}
 </section>
