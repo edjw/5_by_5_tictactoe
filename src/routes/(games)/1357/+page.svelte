@@ -23,4 +23,4 @@
 
 <ResetGameButton />
 
-<PlayerScoresTable />
+<PlayerScoresTable showTwos={true} />

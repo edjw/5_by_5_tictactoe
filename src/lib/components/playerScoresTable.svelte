@@ -1,19 +1,23 @@
 <script>
+	import { titleCase } from "$lib/functions/titleCase";
 	import { playerScores } from "$lib/store/store";
+	export let showTwos = false;
 </script>
 
 <section class="grid grid-cols-2 space-x-4 mt-8">
 	{#each Object.entries($playerScores) as [player, scores]}
-		<div class="flex flex-col space-y-0.5">
+		<div class="flex flex-col space-y-4">
 			<p class="font-semibold">
-				{player}
+				{player} – <span class="font-bold">{scores.score}</span>
+				{scores.score === 1 ? "point" : "points"}
 			</p>
-			<p>Total score: {scores.score}</p>
-			{#each Object.entries(scores.lines) as [lineLength, number]}
-				<p>
-					{lineLength}: {number}
-				</p>
-			{/each}
+			<div class="flex flex-col">
+				{#each Object.entries(scores.lines) as [lineLength, number]}
+					<p class={showTwos === false && lineLength === "twos" ? "hidden" : ""}>
+						{titleCase(lineLength)}: {number}
+					</p>
+				{/each}
+			</div>
 		</div>
 	{/each}
 </section>
