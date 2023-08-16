@@ -49,55 +49,17 @@
 		numberOfTurnsTaken.update((value) => value + 1);
 	}
 
-	function getDirectionClass(direction) {
-		const directionClassMapping = {
-			top_bottom: "line-top-bottom",
-			left_right: "line-left-right",
-			top_left_bottom_right: "line-top-left-bottom-right",
-			bottom_left_top_right: "line-bottom-left-top-right"
-		};
-		if (squareData.directions && squareData.directions.includes(direction)) {
-			return directionClassMapping[direction];
-		}
-		return "";
-	}
+
 </script>
 
 <div
-	class={`relative z-0 flex items-center justify-center w-12 h-12 border rounded m-0.5 md:m-1
+	class={`flex items-center justify-center w-12 h-12 border rounded m-0.5 md:m-1
     ${squareData.value === "X" ? "bg-red-400 border-red-900" : ""}
     ${squareData.value === "O" ? "bg-blue-400 border-blue-900" : ""}`}
 >
-	<!-- Top to bottom line -->
-	<div
-		class={`absolute w-[0.75px] h-full bg-black left-1/2 transform -translate-x-1/2 ${
-			squareData.directions.includes("top_bottom") ? "" : "hidden"
-		}`}
-	/>
-
-	<!-- Left to right line -->
-	<div
-		class={`absolute w-full h-[0.75px] bg-black top-1/2 transform -translate-y-1/2 ${
-			squareData.directions.includes("left_right") ? "" : "hidden"
-		}`}
-	/>
-
-	<!-- Diagonal line: top-left to bottom-right -->
-	<div
-		class={`absolute w-[0.75px] h-[64px] bg-black top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-45 ${
-			squareData.directions.includes("top_left_bottom_right") ? "" : "hidden"
-		}`}
-	/>
-
-	<!-- Diagonal line: bottom-left to top-right -->
-	<div
-		class={`absolute w-[0.75px] h-[64px] bg-black bottom-1/2 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 ${
-			squareData.directions.includes("bottom_left_top_right") ? "" : "hidden"
-		}`}
-	/>
 
 	<button
-		class="z-10 absolute top-0 left-0 w-full h-full select-none"
+		class="w-full h-full select-none"
 		disabled={squareData.value ? true : false}
 		on:click={() => chooseSquare(squareData.row, squareData.col)}
 	>
