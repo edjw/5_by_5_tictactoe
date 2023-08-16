@@ -58,7 +58,7 @@
     {squareData.value === 'O' ? 'bg-blue-400 border-blue-900' : ''}"
 >
 	<button
-		class={`w-full h-full`}
+		class={`w-full h-full select-none`}
 		disabled={squareData.value ? true : false}
 		on:click={() => chooseSquare(squareData.row, squareData.col)}
 	>
