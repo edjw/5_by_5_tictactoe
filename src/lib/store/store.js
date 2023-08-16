@@ -167,7 +167,7 @@ for (let index = 0; index < gridTotalSize; index++) {
  * Resets the gridArray store back to the initial state
  */
 function resetGridArray() {
-    gridArray.set(gridArrayBuilder);
+    gridArray.set(JSON.parse(JSON.stringify(gridArrayBuilder))); // This is to reset the items inside the nested directions array too
     playerScores.reset();
     turn.set("X");
     numberOfTurnsTaken.set(0);

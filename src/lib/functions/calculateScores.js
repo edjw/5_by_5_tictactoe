@@ -56,11 +56,13 @@ function checkLine(matrix, startRow, startCol, dx, dy, length, player) {
     }
 
     // Update directions property of each square in the line
-    line.forEach((square) => {
-        if (!square.directions.includes(directionType)) {
-            square.directions.push(directionType);
-        }
-    });
+    if (line.length >= 3) {  // <-- Check if the length of the line is 3 or more
+        line.forEach((square) => {
+            if (!square.directions.includes(directionType)) {
+                square.directions.push(directionType);
+            }
+        });
+    }
 
     return { line: line, directionType: directionType };
 }
