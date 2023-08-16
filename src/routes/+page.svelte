@@ -24,7 +24,7 @@
 	];
 </script>
 
-<div class="flex flex-col px-4 space-y-8">
+<div class="col-span-full flex flex-col px-4 space-y-8">
 	<h1 class="text-3xl">5-by-5 games</h1>
 	<nav class="flex flex-col space-y-6">
 		{#each games as game}

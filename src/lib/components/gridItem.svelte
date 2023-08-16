@@ -64,7 +64,7 @@
 </script>
 
 <div
-	class={`relative z-0 flex items-center justify-center w-12 h-12 border rounded my-0.5 md:my-1 mx-2 md:mx-1
+	class={`relative z-0 flex items-center justify-center w-12 h-12 border rounded m-0.5 md:m-1
     ${squareData.value === "X" ? "bg-red-400 border-red-900" : ""}
     ${squareData.value === "O" ? "bg-blue-400 border-blue-900" : ""}`}
 >

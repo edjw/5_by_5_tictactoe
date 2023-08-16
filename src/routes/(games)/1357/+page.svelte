@@ -1,13 +1,17 @@
 <script>
-	import GameTitle from "$lib/components/gameTitle.svelte";
-
+	import GameHeader from "$lib/components/gameHeader.svelte";
 	import Rules from "$lib/components/rules.svelte";
 	import GameGrid from "$lib/components/gameGrid.svelte";
 	import ResetGameButton from "$lib/components/resetGameButton.svelte";
 	import PlayerScoresTable from "$lib/components/playerScoresTable.svelte";
+	const title = "1357";
 </script>
 
-<GameTitle title={"1357"} />
+<svelte:head>
+	<title>{title}</title>
+</svelte:head>
+
+<GameHeader {title} />
 
 <div class="flex flex-col mt-8">
 	<GameGrid twoMultiplier={1} threeMultiplier={3} fourMultiplier={5} fiveMultiplier={7} />

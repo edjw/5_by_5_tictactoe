@@ -14,11 +14,7 @@
 	});
 </script>
 
-<section class="self-start ml-4 mt-4">
-	<a class="border pl-2 pr-4 py-2 rounded" href="/">← Back</a>
-</section>
-
-<section class="flex flex-col md:self-start mx-2 mt-4 space-y-8">
+<section class="flex flex-col mx-2 mt-4 space-y-8 col-span-12">
 	<slot />
 
 	<label class="cursor-pointer">
