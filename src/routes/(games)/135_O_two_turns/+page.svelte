@@ -17,8 +17,8 @@
 	<GameGrid
 		twoMultiplier={0}
 		threeMultiplier={1}
-		fourMultiplier={2}
-		fiveMultiplier={3}
+		fourMultiplier={3}
+		fiveMultiplier={5}
 		twoGoesForOFirstTurn={true}
 	/>
 	<ResetGameButton />
