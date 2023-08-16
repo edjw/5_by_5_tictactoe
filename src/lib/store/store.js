@@ -138,7 +138,7 @@ let gridTotalSize = gridSize * gridSize;
  * @type {Square[]}
  * An array containing all the squares in the Tic-Tac-Toe grid
  */
-let gridArrayBuilder = [];
+export let gridArrayBuilder = [];
 
 for (let index = 0; index < gridTotalSize; index++) {
     // Calculate the row and column based on the index
@@ -163,21 +163,9 @@ for (let index = 0; index < gridTotalSize; index++) {
     gridArrayBuilder.push(square);
 }
 
-/**
- * Resets the gridArray store back to the initial state
- */
-function resetGridArray() {
-    gridArray.set(JSON.parse(JSON.stringify(gridArrayBuilder))); // This is to reset the items inside the nested directions array too
-    playerScores.reset();
-    turn.set("X");
-    numberOfTurnsTaken.set(0);
-}
 
 /**
- * @type {import('svelte/store').Writable<Square[]> & { reset: () => void }}
  * Represents the array of squares in the Tic-Tac-Toe grid
  */
-export const gridArray = Object.assign(writable(gridArrayBuilder), {
-    reset: resetGridArray
-});
+export const gridArray = writable(gridArrayBuilder);
 

@@ -1,16 +1,13 @@
 <script>
-	import { gridArray, numberOfTurnsTaken, playerScores, turn } from "$lib/store/store";
-
 	import { showGridLettersNumbers } from "$lib/store/settings";
+
+	import { resetGameState } from "$lib/functions/resetGameState";
 
 	// Reset states when change game type
 	import { onMount } from "svelte";
 
 	onMount(() => {
-		gridArray.reset();
-		playerScores.reset();
-		turn.set("X");
-		numberOfTurnsTaken.set(0);
+		resetGameState();
 	});
 </script>
 
