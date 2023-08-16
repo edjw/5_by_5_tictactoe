@@ -48,18 +48,15 @@
 
 		numberOfTurnsTaken.update((value) => value + 1);
 	}
-
-
 </script>
 
 <div
 	class={`flex items-center justify-center w-12 h-12 border rounded m-0.5 md:m-1
-    ${squareData.value === "X" ? "bg-red-400 border-red-900" : ""}
-    ${squareData.value === "O" ? "bg-blue-400 border-blue-900" : ""}`}
+    ${squareData.value === "X" ? "bg-red-300 border-red-900" : ""}
+    ${squareData.value === "O" ? "bg-blue-300 border-blue-900" : ""}`}
 >
-
 	<button
-		class="w-full h-full select-none"
+		class="w-full h-full select-none text-gray-950"
 		disabled={squareData.value ? true : false}
 		on:click={() => chooseSquare(squareData.row, squareData.col)}
 	>
