@@ -1,7 +1,10 @@
 <script>
+	import FinalScoreDialog from "$lib/components/finalScoreDialog.svelte";
+	import GridItem from "$lib/components/gridItem.svelte";
+	import { numberOfTurnsTaken } from "$lib/store/store";
 	import { gridArray, turn } from "$lib/store/store";
 	import { showGridLettersNumbers } from "$lib/store/settings";
-	import GridItem from "$lib/components/gridItem.svelte";
+	import { resetGameState } from "$lib/functions/resetGameState";
 
 	export let twoMultiplier;
 	export let threeMultiplier;
@@ -9,9 +12,24 @@
 	export let fiveMultiplier;
 	export let twoGoesForOFirstTurn = false;
 
+	let isOpen = false;
+
+	$: if ($numberOfTurnsTaken === 25) {
+		isOpen = true;
+	}
+
+	function handleCloseDialog() {
+		isOpen = false;
+		resetGameState();
+	}
+
 	let letters = ["A", "B", "C", "D", "E"];
 	let numbers = [5, 4, 3, 2, 1];
 </script>
+
+{#if $numberOfTurnsTaken === 25}
+	<FinalScoreDialog {isOpen} closeDialog={handleCloseDialog} />
+{/if}
 
 <div class="mb-2">
 	<p class="text-4xl md:text-5xl text-center">{$turn}</p>
