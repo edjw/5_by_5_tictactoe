@@ -78,7 +78,7 @@ function updatePlayerScore(scoreObj, twoMultiplier = 0, threeMultiplier = 1, fou
 }
 
 
-export const GplayerScores = Object.assign(writable({
+export const playerScores = Object.assign(writable({
     "X": {
         score: 0,
         lines: {

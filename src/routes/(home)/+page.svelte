@@ -8,7 +8,7 @@
 		{
 			title: "135",
 			link: "/135",
-			description: "1 point for a line of 3, 3 for 4, 5 for 5 (best so far)"
+			description: "1 point for a line of 3, 3 for 4, 5 for 5<br />(Best game so far probably)"
 		},
 		{
 			title: "1357",
@@ -19,7 +19,13 @@
 			title: "135, O plays twice on first turn",
 			link: "/135_O_two_turns",
 			description:
-				"1 point for a line of 3, 3 for 4, 5 for 5. O gets to fill two spaces on their first turn"
+				"1 point for a line of 3, 3 for 4, 5 for 5.<br />O gets to fill two spaces on their first turn"
+		},
+		{
+			title: "1357, O plays twice on first turn",
+			link: "/1357_O_two_turns",
+			description:
+				"1 point for a line of 2, 3 for 3, 5 for 4, 7 for 5.<br />O gets to fill two spaces on their first turn"
 		}
 	];
 </script>
@@ -32,7 +38,7 @@
 				<a href={game.link} data-sveltekit-reload class="underline font-semibold text-xl"
 					>{game.title}</a
 				>
-				<p>{game.description}</p>
+				<p>{@html game.description}</p>
 			</section>
 		{/each}
 	</nav>
