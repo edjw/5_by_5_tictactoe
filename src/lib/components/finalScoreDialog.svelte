@@ -59,7 +59,7 @@
 	<div
 		class="relative bg-white p-8 md:p-4 rounded w-full md:w-3/4 xl:w-1/2 h-5/6 md:h-3/4 overflow-auto z-60"
 	>
-		<h2 id="dialog-title" class="text-xl my-4 text-center col-span-full">
+		<h2 id="dialog-title" class="my-4 text-center col-span-full font-bold text-2xl">
 			{#if $playerScores["X"].score > $playerScores["O"].score}
 				X wins
 			{:else if $playerScores["O"].score > $playerScores["X"].score}
@@ -71,11 +71,11 @@
 
 		<section class="grid grid-cols-2 space-x-4 mt-8">
 			{#each Object.entries($playerScores) as [player, scores]}
-				<div class="flex flex-col space-y-2">
-					<p class="font-bold text-center text-2xl">
+				<div class="flex flex-col">
+					<p class="font-semibold text-center text-xl">
 						{player}
 					</p>
-					<p class="font-semibold text-center">
+					<p class="font-medium text-center">
 						{scores.score}
 						{scores.score === 1 ? "point" : "points"}
 					</p>
@@ -93,7 +93,7 @@
 			</div>
 		</section>
 
-		<button on:click={restartGame} class="mt-12 px-2 md:px-4 py-2 rounded border"
+		<button on:click={restartGame} class="mt-12 px-4 py-2 rounded border"
 			>Start again</button
 		>
 	</div>
