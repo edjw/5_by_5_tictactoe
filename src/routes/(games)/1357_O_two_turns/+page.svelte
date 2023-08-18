@@ -4,6 +4,9 @@
 	import GameGrid from "$lib/components/gameGrid.svelte";
 	import ResetGameButton from "$lib/components/resetGameButton.svelte";
 	import PlayerScoresTable from "$lib/components/playerScoresTable.svelte";
+	import UndoButton from "$lib/components/undoButton.svelte";
+	import { allowUndo } from "$lib/store/settings";
+
 	const title = "1357, O plays twice on first turn";
 </script>
 
@@ -21,7 +24,12 @@
 		fiveMultiplier={7}
 		twoGoesForOFirstTurn={true}
 	/>
-	<ResetGameButton />
+	<div class="flex">
+		<ResetGameButton />
+		{#if $allowUndo}
+			<UndoButton />
+		{/if}
+	</div>
 </div>
 
 <Rules>

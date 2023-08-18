@@ -4,6 +4,9 @@
 	import GameGrid from "$lib/components/gameGrid.svelte";
 	import ResetGameButton from "$lib/components/resetGameButton.svelte";
 	import PlayerScoresTable from "$lib/components/playerScoresTable.svelte";
+	import UndoButton from "$lib/components/undoButton.svelte";
+	import { allowUndo } from "$lib/store/settings";
+
 	const title = "1357";
 </script>
 
@@ -15,7 +18,12 @@
 
 <div class="flex flex-col mt-8">
 	<GameGrid twoMultiplier={1} threeMultiplier={3} fourMultiplier={5} fiveMultiplier={7} />
-	<ResetGameButton />
+	<div class="flex">
+		<ResetGameButton />
+		{#if $allowUndo}
+			<UndoButton />
+		{/if}
+	</div>
 </div>
 
 <Rules>

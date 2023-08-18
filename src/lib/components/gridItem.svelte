@@ -1,5 +1,13 @@
 <script>
-	import { turn, gridArray, playerScores, numberOfTurnsTaken } from "$lib/store/store";
+	import {
+		turn,
+		gridArray,
+		gridHistory,
+		playerScores,
+		numberOfTurnsTaken,
+		lastUndoneTurn,
+		canUndo
+	} from "$lib/store/store";
 
 	import { countAllLinesForPlayer } from "$lib/functions/calculateScores";
 
@@ -15,6 +23,12 @@
 	 * @param {number} targetCol - The target column of the square to update
 	 */
 	function chooseSquare(targetRow, targetCol) {
+		// Push current grid state to gridHistory before updating
+		gridHistory.push(JSON.parse(JSON.stringify($gridArray)));
+
+		// Reset the last undone turn after a new move
+		lastUndoneTurn.set(null);
+
 		// Update the grid data
 		gridArray.update((arr) => {
 			return arr.map((square) => {
@@ -47,6 +61,8 @@
 		}
 
 		numberOfTurnsTaken.update((value) => value + 1);
+
+		canUndo.set(true); // Enable undo after a new move
 	}
 </script>
 

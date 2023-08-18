@@ -1,6 +1,5 @@
 import { writable } from 'svelte/store';
 
-
 // Player turn state
 /**
  * @type {import('svelte/store').Writable<"X" | "O">}
@@ -10,12 +9,38 @@ export const turn = writable("X");
 
 export const numberOfTurnsTaken = writable(0);
 
+/**
+ * Represents the last turn that was undone
+ * @type {import('svelte/store').Writable<"X" | "O" | null>}
+ */
+export const lastUndoneTurn = writable(null);
+
+export const canUndo = writable(true);
+
 
 
 // Player score state
 /**
  * Represents the score of a player within a single game
  * @typedef {{ score: number; lines: { [key: string]: number }; }} PlayerScore
+ */
+
+/**
+ * Represents the state of the score
+ * @typedef {Object} ScoreState
+ * @property {PlayerScore} X - Player X's score state
+ * @property {PlayerScore} O - Player O's score state
+ */
+
+/**
+ * Represents the history of the store's state
+ * @type {ScoreState[]}
+ */
+let history = [];
+
+/**
+ * Represents a player type
+ * @typedef {'X' | 'O'} PlayerType
  */
 
 /**
@@ -44,11 +69,9 @@ function resetPlayerScores() {
     });
 }
 
-
 function updatePlayerScore(scoreObj, twoMultiplier = 0, threeMultiplier = 1, fourMultiplier = 2, fiveMultiplier = 3) {
     // Extract properties from scoreObj
     const { player, twos = 0, threes = 0, fours = 0, fives = 0 } = scoreObj;
-
 
     if (!player || !["X", "O"].includes(player)) {
         console.error("Invalid player:", player);
@@ -56,6 +79,9 @@ function updatePlayerScore(scoreObj, twoMultiplier = 0, threeMultiplier = 1, fou
     }
 
     playerScores.update(scores => {
+        // Push current state to history before updating
+        history.push(JSON.parse(JSON.stringify(scores)));
+
         if (!scores[player]) {
             console.error("Player not found in scores:", player);
             return scores;
@@ -76,6 +102,15 @@ function updatePlayerScore(scoreObj, twoMultiplier = 0, threeMultiplier = 1, fou
         return scores;
     });
 }
+
+function rewind() {
+    if (history.length > 0) {
+        const lastState = history.pop();
+        const deepCopy = JSON.parse(JSON.stringify(lastState));
+        playerScores.set(deepCopy);
+    }
+}
+
 
 
 export const playerScores = Object.assign(writable({
@@ -99,8 +134,10 @@ export const playerScores = Object.assign(writable({
     }
 }), {
     reset: resetPlayerScores,
-    updatePlayerScore
+    updatePlayerScore,
+    rewind
 });
+
 
 // Grid State
 
@@ -165,7 +202,30 @@ for (let index = 0; index < gridTotalSize; index++) {
 
 
 /**
+ * Represents the history of the gridArray store's state
+ * @type {Square[][]}
+ */
+export let gridHistory = [];
+
+/**
+ * Rewinds the gridArray state to its previous state
+ */
+function rewindGrid() {
+    if (gridHistory.length > 0) {
+        const lastGridState = gridHistory.pop();
+        if (Array.isArray(lastGridState)) {
+            const deepCopy = JSON.parse(JSON.stringify(lastGridState));
+            gridArray.set(deepCopy);
+        } else {
+            console.error("Invalid grid state in history:", lastGridState);
+        }
+    }
+}
+
+
+/**
  * Represents the array of squares in the Tic-Tac-Toe grid
  */
-export const gridArray = writable(gridArrayBuilder);
-
+export const gridArray = Object.assign(writable(gridArrayBuilder), {
+    rewind: rewindGrid
+});
