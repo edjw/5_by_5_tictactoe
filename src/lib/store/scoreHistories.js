@@ -12,21 +12,28 @@ import { games } from './pages';
  * An object that maps game titles to their respective scores.
  * @type {Object<string, GameScore>}
  */
-let scoresObject = {};
+const initialScoresObject = {};
 
 games.forEach(game => {
-    scoresObject[game.title] = {
+    initialScoresObject[game.title] = {
         "X": [],
         "O": []
     };
 });
 
-
 /**
  * A persistent Svelte store that holds the scores for all games.
  * @type {import('@macfja/svelte-persistent-store').PersistentStore<{ [x: string]: GameScore; }[]>}
  */
-export const allFinalScores = persist(writable([scoresObject]), createIndexedDBStorage(), "allFinalScores");
+export const allFinalScores = persist(writable([initialScoresObject]), createIndexedDBStorage(), "allFinalScores");
+
+/**
+ * Resets the allFinalScores store to its initial state.
+ */
+export function resetAllFinalScores() {
+    allFinalScores.set([initialScoresObject]);
+}
+
 
 /**
  * Updates or adds the final scores for a specific game.
@@ -35,6 +42,11 @@ export const allFinalScores = persist(writable([scoresObject]), createIndexedDBS
  * @param {GameScore} scores - The scores to save for the game.
  */
 export function saveFinalScores(title, scores) {
+
+    if (title === undefined) {
+        console.log("Send a title through")
+    }
+
     allFinalScores.update(allScores => {
         // Find the game by its title
         let gameScores = allScores[0][title];
@@ -118,4 +130,23 @@ export const gameStats = derived(allFinalScores, $allFinalScores => {
     }
 
     return stats;
+});
+
+// Derived store for total games played
+export const totalGamesForAll = derived(allFinalScores, $allFinalScores => {
+    const totalGames = {};
+
+    if ($allFinalScores[0]) {
+        const scores = $allFinalScores[0];
+
+        Object.keys(scores).forEach((gameTitle) => {
+            if (scores[gameTitle] && Array.isArray(scores[gameTitle].X)) {
+                totalGames[gameTitle] = scores[gameTitle].X.length;
+            } else {
+                totalGames[gameTitle] = 0; // Default to 0 if data is missing or incorrect
+            }
+        });
+    }
+
+    return totalGames;
 });

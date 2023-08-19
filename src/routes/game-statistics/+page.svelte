@@ -1,21 +1,11 @@
 <script>
-	import { gameStats, allFinalScores } from "$lib/store/scoreHistories";
-
+	import { gameStats, resetAllFinalScores, totalGamesForAll } from "$lib/store/scoreHistories";
 	import GameHeader from "$lib/components/gameHeader.svelte";
 
-	/** @type {Object<string, number>} */
-	let totalGamesForAll = {};
+	let hasStats = false;
 
-	if ($allFinalScores[0]) {
-		const scores = $allFinalScores[0];
-
-		Object.keys(scores).forEach((gameTitle) => {
-			if (scores[gameTitle] && Array.isArray(scores[gameTitle].X)) {
-				totalGamesForAll[gameTitle] = scores[gameTitle].X.length;
-			} else {
-				totalGamesForAll[gameTitle] = 0; // Default to 0 if data is missing or incorrect
-			}
-		});
+	$: {
+		hasStats = Object.values($totalGamesForAll).some((value) => value > 0);
 	}
 </script>
 
@@ -32,19 +22,28 @@
 				<section class="border p-4 rounded shadow">
 					<h2 class="text-xl font-semibold mb-2">{gameTitle}</h2>
 					<p>
-						{totalGamesForAll[gameTitle]}
-						{totalGamesForAll[gameTitle] > 1 ? "games" : "game"} played.
-					</p>
-
-					<p>
+						In the {$totalGamesForAll[gameTitle]}
+						{$totalGamesForAll[gameTitle] === 1 ? "game" : "games"} played so far,
 						{#if stats.averageScoreDifference.leader === "X"}
-							X beats O by an average of {Math.round(stats.averageScoreDifference.difference)} points.
+							{#if $totalGamesForAll[gameTitle] === 1}
+								X beat O by 1 point. Play more games to create an average.
+							{:else}
+								X beats O by an average of {Math.round(stats.averageScoreDifference.difference)}
+								{Math.round(stats.averageScoreDifference.difference) === 1 ? "point" : "points"}.
+							{/if}
 						{:else if stats.averageScoreDifference.leader === "O"}
-							O beats X by an average of {Math.round(stats.averageScoreDifference.difference)} points.
+							{#if $totalGamesForAll[gameTitle] === 1}
+								O beat X by 1 point. Play more games to create an average.
+							{:else}
+								O beats X by an average of {Math.round(stats.averageScoreDifference.difference)}
+								{Math.round(stats.averageScoreDifference.difference) === 1 ? "point" : "points"}.
+							{/if}
+						{:else if $totalGamesForAll[gameTitle] === 1}
+							X and O drew. Play more games to create an average.
 						{:else}
 							On average, X and O draw.
 						{/if}
-					</p>
+					</p>Ì
 
 					{#if !isNaN(stats.xWinPercentage) && !isNaN(stats.oWinPercentage) && !isNaN(stats.drawPercentage)}
 						<ul class="mt-4">
@@ -68,4 +67,12 @@
 			{/each}
 		</div>
 	</div>
+
+	{#if hasStats}
+		<section>
+			<button class="border px-4 py-2 rounded" on:click={resetAllFinalScores}
+				>Reset all statistics</button
+			>
+		</section>
+	{/if}
 </div>
