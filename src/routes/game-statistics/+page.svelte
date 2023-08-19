@@ -22,7 +22,7 @@
 	<div class="container mx-auto p-6">
 		<GameHeader title={"Game Statistics"} />
 		<p class="mt-4 text-gray-600">
-			This page {hasStats ? "will show" : "shows"} statistics about the results for each of the games
+			This page {hasStats ? "shows" : "will show"} statistics about the results for each of the games
 			you've played. It only shows data about games played on this browser (Chrome/Firefox etc) on this
 			device.
 		</p>
