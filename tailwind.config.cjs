@@ -6,7 +6,13 @@ const config = {
 	],
 
 	theme: {
-		extend: {}
+		extend: {
+			utilities: {
+				'.touch-manipulation': {
+					'touch-action': 'manipulation',
+				},
+			}
+		},
 	},
 
 	plugins: []

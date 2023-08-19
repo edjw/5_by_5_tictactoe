@@ -1,79 +1,118 @@
 import { writable, derived } from 'svelte/store';
-import { persist, createIndexedDBStorage } from "@macfja/svelte-persistent-store"
+import { persist, createIndexedDBStorage } from "@macfja/svelte-persistent-store";
+import { games } from './pages';
 
 /**
- * @typedef {Object} PlayerAverage
- * @property {number} total
- * @property {number} count
- * @property {number} average
+ * @typedef {Object} GameScore
+ * @property {number[]} X - An array of final scores for player X.
+ * @property {number[]} O - An array of final scores for player O.
  */
 
 /**
- * @typedef {Object} GameAverage
- * @property {PlayerAverage} X
- * @property {PlayerAverage} O
+ * An object that maps game titles to their respective scores.
+ * @type {Object<string, GameScore>}
  */
+let scoresObject = {};
 
-/**
- * @typedef {Record<string, GameAverage>} AverageScoresType
- */
-
-
-export const allFinalScores = persist(writable([]), createIndexedDBStorage(), "allFinalScores")
-
-export const averageScoresWritable = writable({
-    "dummyTitle": {
-        X: { total: 0, count: 0, average: 0 },
-        O: { total: 0, count: 0, average: 0 }
-    }
+games.forEach(game => {
+    scoresObject[game.title] = {
+        "X": [],
+        "O": []
+    };
 });
 
 
+/**
+ * A persistent Svelte store that holds the scores for all games.
+ * @type {import('@macfja/svelte-persistent-store').PersistentStore<{ [x: string]: GameScore; }[]>}
+ */
+export const allFinalScores = persist(writable([scoresObject]), createIndexedDBStorage(), "allFinalScores");
 
-export const averageScores = persist(averageScoresWritable, createIndexedDBStorage(), "averageScores");
-
-
-
+/**
+ * Updates or adds the final scores for a specific game.
+ *
+ * @param {string} title - The title of the game.
+ * @param {GameScore} scores - The scores to save for the game.
+ */
 export function saveFinalScores(title, scores) {
     allFinalScores.update(allScores => {
-        return [...allScores, {
-            title: title,
-            scores: scores
-        }];
+        // Find the game by its title
+        let gameScores = allScores[0][title];
+        if (gameScores) {
+            // Append the new scores to the existing arrays
+            gameScores.X.push(...scores.X);
+            gameScores.O.push(...scores.O);
+        } else {
+            // If the game doesn't exist, add it with the given scores
+            allScores[0][title] = {
+                "X": scores.X,
+                "O": scores.O
+            };
+        }
+        return allScores;
     });
 }
 
-/**
- * @type {import('svelte/store').Readable<AverageScoresType>}
- */
-export const averageScoresDerived = derived(allFinalScores, ($allFinalScores) => {
-    const averages = {};
 
-    $allFinalScores.forEach(game => {
-        if (!averages[game.title]) {
-            averages[game.title] = {
-                X: { total: 0, count: 0 },
-                O: { total: 0, count: 0 }
-            };
+// Derived store for statistics
+export const gameStats = derived(allFinalScores, $allFinalScores => {
+
+    /**
+ * @typedef {Object} AverageScoreDifference
+ * @property {("X"|"O")} leader - Indicates which player has a higher average score.
+ * @property {number} difference - The average difference in scores.
+ */
+
+    /**
+     * @typedef {Object} GameStatistics
+     * @property {number} xWinPercentage - Percentage of games won by player X.
+     * @property {number} oWinPercentage - Percentage of games won by player O.
+     * @property {number} drawPercentage - Percentage of games that ended in a draw.
+     * @property {AverageScoreDifference} averageScoreDifference - Average score difference details.
+     */
+
+    /**
+     * An object that maps game titles to their respective statistics.
+     * @type {Object.<string, GameStatistics>}
+     */
+    let stats = {};
+
+    // Iterate over each game type
+    for (let gameTitle in $allFinalScores[0]) {
+        let game = $allFinalScores[0][gameTitle];
+        let totalGames = game.X.length; // Assuming X and O play the same number of games
+
+        // If no games have been played, skip the calculations and continue to the next game
+        if (totalGames === 0) {
+            continue;
         }
 
-        averages[game.title].X.total += game.scores.X.score;
-        averages[game.title].X.count += 1;
+        // Calculate wins and draws
+        let xWins = game.X.filter((score, index) => score > game.O[index]).length;
 
-        averages[game.title].O.total += game.scores.O.score;
-        averages[game.title].O.count += 1;
-    });
+        let oWins = game.O.filter((score, index) => score > game.X[index]).length;
+        let draws = totalGames - xWins - oWins;
 
-    // Convert totals to averages
-    for (const title in averages) {
-        averages[title].X.average = averages[title].X.total / averages[title].X.count;
-        averages[title].O.average = averages[title].O.total / averages[title].O.count;
+        // Calculate average score difference
+        let totalDifference = game.X.reduce((acc, score, index) => acc + (score - game.O[index]), 0);
+        let averageDifference = Math.abs(totalDifference / totalGames);
+
+        /**
+          * Leader can be X or O
+          * @type {"X" | "O"}
+          */
+        let leader = totalDifference > 0 ? "X" : "O";
+
+        stats[gameTitle] = {
+            xWinPercentage: (xWins / totalGames) * 100,
+            oWinPercentage: (oWins / totalGames) * 100,
+            drawPercentage: (draws / totalGames) * 100,
+            averageScoreDifference: {
+                leader: leader,
+                difference: averageDifference
+            }
+        };
     }
 
-    // Update the writable store with the new averages
-    averageScoresWritable.set(averages);
-
-    return averages;
+    return stats;
 });
-
-

@@ -1,33 +1,5 @@
 <script>
-	let games = [
-		{
-			title: "123",
-			link: "/123",
-			description: "1 point for a line of 3, 2 for 4, 3 for 5"
-		},
-		{
-			title: "135",
-			link: "/135",
-			description: "1 point for a line of 3, 3 for 4, 5 for 5<br />(Best game so far probably)"
-		},
-		{
-			title: "1357",
-			link: "/1357",
-			description: "1 point for a line of 2, 3 for 3, 5 for 4, 7 for 5"
-		},
-		{
-			title: "135, O plays twice on first turn",
-			link: "/135_O_two_turns",
-			description:
-				"1 point for a line of 3, 3 for 4, 5 for 5.<br />O gets to fill two spaces on their first turn"
-		},
-		{
-			title: "1357, O plays twice on first turn",
-			link: "/1357_O_two_turns",
-			description:
-				"1 point for a line of 2, 3 for 3, 5 for 4, 7 for 5.<br />O gets to fill two spaces on their first turn"
-		}
-	];
+	import { games } from "$lib/store/pages";
 </script>
 
 <div class="col-span-full flex flex-col px-4 space-y-8">
@@ -41,5 +13,12 @@
 				<p>{@html game.description}</p>
 			</section>
 		{/each}
+		<hr />
+		<section>
+			<a href="/game-statistics" data-sveltekit-reload class="underline font-semibold text-xl"
+				>Game statistics</a
+			>
+			<p>See a summary of statistics about each game</p>
+		</section>
 	</nav>
 </div>

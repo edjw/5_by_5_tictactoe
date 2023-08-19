@@ -66,13 +66,16 @@
 		numberOfTurnsTaken.update((value) => value + 1);
 
 		if ($numberOfTurnsTaken === 25) {
-			saveFinalScores(title, $playerScores);
+			saveFinalScores(title, {
+				X: [$playerScores.X.score],
+				O: [$playerScores.O.score]
+			});
 		}
 	}
 </script>
 
 <div
-	class={`flex items-center justify-center w-12 h-12 border rounded m-0.5 md:m-1
+	class={`flex items-center justify-center w-12 h-12 border rounded m-1.5 md:m-1
     ${squareData.value === "X" ? "bg-red-300 border-red-900" : ""}
     ${squareData.value === "O" ? "bg-blue-300 border-blue-900" : ""}`}
 >

@@ -37,11 +37,11 @@
 </div>
 <div class="grid grid-cols-12">
 	<section
-		class="col-start-1 sm:col-start-3 col-span-10 sm:col-span-7 grid grid-cols-6 grid-rows-7 mt-8"
+		class="col-start-1 sm:col-start-2 col-span-full sm:col-span-10 grid grid-cols-12 grid-rows-7 mt-8"
 	>
 		<!-- Main Grid -->
 		<div
-			class="col-start-2 col-span-5 row-start-2 row-span-5 grid grid-cols-5 content-center justify-items-center min-w-[200px] max-w-[350px] mx-auto"
+			class="col-start-2 col-span-10 row-start-2 row-span-5 grid grid-cols-5 content-center justify-items-center min-w-[200px] max-w-[350px] mx-auto"
 		>
 			{#each $gridArray as squareData}
 				<GridItem
@@ -58,12 +58,12 @@
 
 		<!-- Column Letters -->
 		<div
-			class="col-start-2 col-span-5 row-start-7 grid grid-cols-5 content-center justify-items-center mt-2 {$showGridLettersNumbers
+			class="col-start-3 col-span-full sm:col-start-3 sm:col-span-8 row-start-7 grid grid-cols-5 content-center justify-items-center mt-2 min-w-[200px] max-w-[350px]  {$showGridLettersNumbers
 				? ''
 				: 'invisible'}"
 		>
 			{#each letters as letter}
-				<span class="text-center text-xs">{letter}</span>
+				<span class="flex items-center justify-center w-full h-full text-xs">{letter}</span>
 			{/each}
 		</div>
 

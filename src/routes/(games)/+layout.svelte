@@ -11,7 +11,7 @@
 	});
 </script>
 
-<section class="flex flex-col mx-2 mt-4 space-y-8 col-span-12">
+<section class="flex flex-col mx-2 mt-4 space-y-8 col-span-12 touch-manipulation">
 	<slot />
 
 	<div class="flex flex-col space-y-8 ml-4">
