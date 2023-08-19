@@ -57,7 +57,7 @@
 	<div class="fixed inset-0 w-full h-full bg-gray-800" />
 
 	<div
-		class="relative bg-white p-8 md:p-4 rounded w-full md:w-3/4 xl:w-1/2 h-5/6 md:h-3/4 overflow-auto z-60"
+		class="relative bg-white p-8 md:p-4 rounded w-full md:w-3/4 xl:w-1/2 max-h-screen h-auto md:h-3/4 overflow-y-auto z-60 pb-16"
 	>
 		<h2 id="dialog-title" class="my-4 text-center col-span-full font-bold text-2xl">
 			{#if $playerScores["X"].score > $playerScores["O"].score}
@@ -83,9 +83,11 @@
 			{/each}
 		</section>
 
-		<section class="col-span-12 sm:col-start-2 sm:col-span-10 grid grid-cols-12 grid-rows-1 mt-8">
+		<section
+			class="col-span-12 sm:col-start-2 sm:col-span-10 grid grid-cols-12 grid-rows-1 mx-auto gap-2 sm:gap-4"
+		>
 			<div
-				class="col-span-8 col-start-3 row-start-2 row-span-5 grid grid-cols-5 gap-2 sm:gap-4 content-center justify-items-center w-full mx-auto"
+				class="col-span-full sm:col-span-8 sm:col-start-3 row-start-2 row-span-5 grid grid-cols-5 gap-2 sm:gap-4 content-center justify-items-center mx-auto"
 			>
 				{#each $gridArray as squareData}
 					<StaticGridItem {squareData} />
@@ -93,6 +95,10 @@
 			</div>
 		</section>
 
-		<button on:click={restartGame} class="mt-12 px-4 py-2 rounded border">Start again</button>
+		<button
+			on:click={restartGame}
+			class="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded border"
+			>Start again</button
+		>
 	</div>
 </dialog>
