@@ -51,7 +51,7 @@
 <dialog
 	aria-labelledby="dialog-title"
 	bind:this={dialogElement}
-	class="fixed inset-0 flex items-center justify-center z-50"
+	class="fixed inset-0 flex items-center justify-center z-50 h-screen w-screen"
 	in:fade={{ duration: 200 }}
 >
 	<div class="fixed inset-0 w-full h-full bg-gray-800" />
@@ -83,9 +83,9 @@
 			{/each}
 		</section>
 
-		<section class="col-span-12 sm:col-start-2 sm:col-span-10 grid grid-cols-5 grid-rows-1 mt-8">
+		<section class="col-span-12 sm:col-start-2 sm:col-span-10 grid grid-cols-12 grid-rows-1 mt-8">
 			<div
-				class="col-span-5 row-start-2 row-span-5 grid grid-cols-5 gap-2 sm:gap-4 content-center justify-items-center w-full mx-auto"
+				class="col-span-8 col-start-3 row-start-2 row-span-5 grid grid-cols-5 gap-2 sm:gap-4 content-center justify-items-center w-full mx-auto"
 			>
 				{#each $gridArray as squareData}
 					<StaticGridItem {squareData} />
@@ -93,8 +93,6 @@
 			</div>
 		</section>
 
-		<button on:click={restartGame} class="mt-12 px-4 py-2 rounded border"
-			>Start again</button
-		>
+		<button on:click={restartGame} class="mt-12 px-4 py-2 rounded border">Start again</button>
 	</div>
 </dialog>
