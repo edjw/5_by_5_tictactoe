@@ -11,6 +11,7 @@
 	export let fourMultiplier;
 	export let fiveMultiplier;
 	export let twoGoesForOFirstTurn = false;
+	export let title;
 
 	let isOpen = false;
 
@@ -50,6 +51,7 @@
 					{fourMultiplier}
 					{fiveMultiplier}
 					{twoGoesForOFirstTurn}
+					{title}
 				/>
 			{/each}
 		</div>

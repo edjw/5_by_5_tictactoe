@@ -17,7 +17,7 @@
 <GameHeader {title} />
 
 <div class="flex flex-col mt-8">
-	<GameGrid twoMultiplier={1} threeMultiplier={3} fourMultiplier={5} fiveMultiplier={7} />
+	<GameGrid twoMultiplier={1} threeMultiplier={3} fourMultiplier={5} fiveMultiplier={7} {title} />
 	<div class="flex">
 		<ResetGameButton />
 		{#if $allowUndo}

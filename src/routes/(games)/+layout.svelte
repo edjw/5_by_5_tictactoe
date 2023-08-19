@@ -1,6 +1,5 @@
 <script>
 	import { showGridLettersNumbers, allowUndo } from "$lib/store/settings";
-	import { numberOfTurnsTaken } from "$lib/store/store";
 
 	import { resetGameState } from "$lib/functions/resetGameState";
 
@@ -25,13 +24,11 @@
 			>
 		</label>
 
-		{#if $numberOfTurnsTaken < 2}
-			<label class="cursor-pointer">
-				<input type="checkbox" bind:checked={$allowUndo} class="hidden" />
-				<span class="border px-4 py-2 rounded">
-					{$allowUndo === true ? "Disable Undo" : "Allow Undo"}
-				</span>
-			</label>
-		{/if}
+		<label class="cursor-pointer">
+			<input type="checkbox" bind:checked={$allowUndo} class="hidden" />
+			<span class="border px-4 py-2 rounded">
+				{$allowUndo === true ? "Disable Undo" : "Allow Undo"}
+			</span>
+		</label>
 	</div>
 </section>

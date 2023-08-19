@@ -16,12 +16,12 @@
 <GameHeader {title} />
 
 <div class="mt-8">
-	<GameGrid twoMultiplier={0} threeMultiplier={1} fourMultiplier={2} fiveMultiplier={3} />
+	<GameGrid twoMultiplier={0} threeMultiplier={1} fourMultiplier={2} fiveMultiplier={3} {title} />
 	<div class="flex">
 		<ResetGameButton />
 
 		{#if $allowUndo}
-			 <UndoButton />
+			<UndoButton />
 		{/if}
 	</div>
 </div>

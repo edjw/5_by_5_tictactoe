@@ -10,6 +10,7 @@
 	} from "$lib/store/store";
 
 	import { countAllLinesForPlayer } from "$lib/functions/calculateScores";
+	import { saveFinalScores } from "$lib/store/scoreHistories";
 
 	export let squareData;
 	export let twoMultiplier = 0;
@@ -17,6 +18,7 @@
 	export let fourMultiplier = 2;
 	export let fiveMultiplier = 3;
 	export let twoGoesForOFirstTurn = false;
+	export let title;
 
 	/**
 	 * @param {number} targetRow - The target row of the square to update
@@ -60,9 +62,12 @@
 			turn.update((value) => (value === "X" ? "O" : "X"));
 		}
 
+		canUndo.set(true); // Enable undo after a new move
 		numberOfTurnsTaken.update((value) => value + 1);
 
-		canUndo.set(true); // Enable undo after a new move
+		if ($numberOfTurnsTaken === 25) {
+			saveFinalScores(title, $playerScores);
+		}
 	}
 </script>
 

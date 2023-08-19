@@ -23,6 +23,7 @@
 		fourMultiplier={5}
 		fiveMultiplier={7}
 		twoGoesForOFirstTurn={true}
+		{title}
 	/>
 	<div class="flex">
 		<ResetGameButton />

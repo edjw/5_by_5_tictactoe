@@ -23,6 +23,7 @@
 		fourMultiplier={3}
 		fiveMultiplier={5}
 		twoGoesForOFirstTurn={true}
+		{title}
 	/>
 
 	<div class="flex">
