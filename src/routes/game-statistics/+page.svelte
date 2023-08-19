@@ -14,14 +14,17 @@
 			totalGamesForAll[gameTitle] = scores[gameTitle].X.length;
 		});
 	}
+
+	const hasStats = Object.values(totalGamesForAll).some((game) => game > 0);
 </script>
 
 <div class="col-span-full flex flex-col px-4 space-y-8">
 	<div class="container mx-auto p-6">
 		<GameHeader title={"Game Statistics"} />
 		<p class="mt-4 text-gray-600">
-			This page shows statistics about the results for each of the games you've played. It only
-			shows data about games played on this browser (Chrome/Firefox etc) on this device.
+			This page {hasStats ? "will show" : "shows"} statistics about the results for each of the games
+			you've played. It only shows data about games played on this browser (Chrome/Firefox etc) on this
+			device.
 		</p>
 		<p />
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
