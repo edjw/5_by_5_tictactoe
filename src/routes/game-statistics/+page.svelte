@@ -7,11 +7,14 @@
 	let totalGamesForAll = {};
 
 	if ($allFinalScores[0]) {
-		/** @type {Object<string, {X: number[], O: number[]}>} */
 		const scores = $allFinalScores[0];
 
 		Object.keys(scores).forEach((gameTitle) => {
-			totalGamesForAll[gameTitle] = scores[gameTitle].X.length;
+			if (scores[gameTitle] && Array.isArray(scores[gameTitle].X)) {
+				totalGamesForAll[gameTitle] = scores[gameTitle].X.length;
+			} else {
+				totalGamesForAll[gameTitle] = 0; // Default to 0 if data is missing or incorrect
+			}
 		});
 	}
 

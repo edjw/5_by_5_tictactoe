@@ -80,7 +80,10 @@ export const gameStats = derived(allFinalScores, $allFinalScores => {
     // Iterate over each game type
     for (let gameTitle in $allFinalScores[0]) {
         let game = $allFinalScores[0][gameTitle];
-        let totalGames = game.X.length; // Assuming X and O play the same number of games
+
+
+        let totalGames = game.X && Array.isArray(game.X) ? game.X.length : 0;
+
 
         // If no games have been played, skip the calculations and continue to the next game
         if (totalGames === 0) {
