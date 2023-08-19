@@ -43,7 +43,7 @@
 						{:else}
 							On average, X and O draw.
 						{/if}
-					</p>Ì
+					</p>
 
 					{#if !isNaN(stats.xWinPercentage) && !isNaN(stats.oWinPercentage) && !isNaN(stats.drawPercentage)}
 						<ul class="mt-4">
