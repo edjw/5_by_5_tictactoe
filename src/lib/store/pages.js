@@ -1,3 +1,13 @@
+/**
+ * @typedef {Object} Game
+ * @property {string} title - The title of the game.
+ * @property {string} link - The link to the game.
+ * @property {string} description - The description of the game.
+ */
+
+/**
+ * @type {Game[]}
+ */
 export let games = [
     {
         title: "123",

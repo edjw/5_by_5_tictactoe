@@ -2,29 +2,11 @@ import { writable, derived } from 'svelte/store';
 import { persist, createIndexedDBStorage } from "@macfja/svelte-persistent-store";
 import { games } from './pages';
 
-/**
- * @typedef {Object} GameScore
- * @property {number[]} X - An array of final scores for player X.
- * @property {number[]} O - An array of final scores for player O.
- */
+const initialScoresObject = games.reduce((acc, game) => {
+    acc[game.title] = { "X": [], "O": [] };
+    return acc;
+}, {});
 
-/**
- * An object that maps game titles to their respective scores.
- * @type {Object<string, GameScore>}
- */
-const initialScoresObject = {};
-
-games.forEach(game => {
-    initialScoresObject[game.title] = {
-        "X": [],
-        "O": []
-    };
-});
-
-/**
- * A persistent Svelte store that holds the scores for all games.
- * @type {import('@macfja/svelte-persistent-store').PersistentStore<{ [x: string]: GameScore; }[]>}
- */
 export const allFinalScores = persist(writable([initialScoresObject]), createIndexedDBStorage(), "allFinalScores");
 
 /**
@@ -35,30 +17,28 @@ export function resetAllFinalScores() {
     allFinalScores.set(deepCopy);
 }
 
-/**
- * Updates or adds the final scores for a specific game.
- *
- * @param {string} title - The title of the game.
- * @param {GameScore} scores - The scores to save for the game.
- */
+
 export function saveFinalScores(title, scores) {
 
-    if (title === undefined) {
-        console.log("Send a title through")
+    if (!title) {
+        console.error("Title is required.");
+        return;
     }
+
+    const updatedScores = JSON.parse(JSON.stringify(scores));
 
     allFinalScores.update(allScores => {
         // Find the game by its title
         let gameScores = allScores[0][title];
         if (gameScores) {
-            // Append the new scores to the existing arrays
-            gameScores.X.push(...scores.X);
-            gameScores.O.push(...scores.O);
+            gameScores.X = [...gameScores.X, ...updatedScores.X];
+            gameScores.O = [...gameScores.O, ...updatedScores.O];
+
         } else {
             // If the game doesn't exist, add it with the given scores
             allScores[0][title] = {
-                "X": scores.X,
-                "O": scores.O
+                "X": updatedScores.X,
+                "O": updatedScores.O
             };
         }
         return allScores;
