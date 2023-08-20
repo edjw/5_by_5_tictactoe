@@ -49,7 +49,7 @@
 		if (!liveRegion) {
 			return;
 		}
-		liveRegion.textContent = `Cell at row ${targetRow} and column ${targetCol} has been chosen.`;
+		liveRegion.textContent = `Cell at column ${targetCol} and row ${targetRow} has been chosen.`;
 
 		// Count the current scores
 		const currentPlayerScore = countAllLinesForPlayer($gridArray, $turn, {
