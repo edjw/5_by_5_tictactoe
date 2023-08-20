@@ -5,6 +5,7 @@
 	import { gridArray, turn } from "$lib/store/store";
 	import { showGridLettersNumbers } from "$lib/store/settings";
 	import { resetGameState } from "$lib/functions/resetGameState";
+	import FillAllSquaresButton from "$lib/components/debugFillGridButton.svelte";
 
 	export let twoMultiplier;
 	export let threeMultiplier;
@@ -42,6 +43,7 @@
 		<!-- Main Grid -->
 		<div
 			class="col-start-2 col-span-10 row-start-2 row-span-5 grid grid-cols-5 content-center justify-items-center min-w-[200px] max-w-[350px] mx-auto"
+			id="gameGrid"
 		>
 			{#each $gridArray as squareData}
 				<GridItem
@@ -58,7 +60,7 @@
 
 		<!-- Column Letters -->
 		<div
-			class="col-start-3 col-span-full sm:col-start-3 sm:col-span-8 row-start-7 grid grid-cols-5 content-center justify-items-center mt-2 min-w-[200px] max-w-[350px]  {$showGridLettersNumbers
+			class="col-start-3 col-span-full sm:col-start-3 sm:col-span-8 row-start-7 grid grid-cols-5 content-center justify-items-center mt-2 min-w-[200px] max-w-[350px] {$showGridLettersNumbers
 				? ''
 				: 'invisible'}"
 		>
@@ -79,3 +81,5 @@
 		</div>
 	</section>
 </div>
+
+<FillAllSquaresButton />

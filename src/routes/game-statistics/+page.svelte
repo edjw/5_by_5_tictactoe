@@ -8,17 +8,23 @@
 		hasStats = Object.values($totalGamesForAll).some((value) => value > 0);
 	}
 
-	function getScoreDifferenceMessage(leader, difference) {
+	function getScoreDifferenceMessage(leader, difference, gameTitle) {
+		const gamesPlayed = $totalGamesForAll[gameTitle];
+		const averageText = gamesPlayed > 1 ? "an average of " : "";
+		const roundedDifference = Math.round(difference * 10) / 10; // Round to nearest 0.1
+
+		if (difference === 0) {
+			return gamesPlayed === 1 ? "X and O drew" : "On average, X and O draw";
+		}
+
 		if (leader === "X") {
-			return `X ${$totalGamesForAll[gameTitle] === 1 ? "beat" : "beats"} O by ${
-				difference === 1 ? "1 point" : `${Math.round(difference)} points`
+			return `X ${gamesPlayed === 1 ? "beat" : "beats"} O by ${averageText}${
+				roundedDifference === 1 ? "1 point" : `${roundedDifference} points`
 			}`;
 		} else if (leader === "O") {
-			return `O ${$totalGamesForAll[gameTitle] === 1 ? "beat" : "beats"} X by ${
-				difference === 1 ? "1 point" : `${Math.round(difference)} points`
+			return `O ${gamesPlayed === 1 ? "beat" : "beats"} X by ${averageText}${
+				roundedDifference === 1 ? "1 point" : `${roundedDifference} points`
 			}`;
-		} else {
-			return $totalGamesForAll[gameTitle] === 1 ? "X and O drew" : "On average, X and O draw";
 		}
 	}
 </script>
@@ -42,12 +48,14 @@
 						{#if $totalGamesForAll[gameTitle] === 1}
 							{getScoreDifferenceMessage(
 								stats.averageScoreDifference.leader,
-								Math.round(stats.averageScoreDifference.difference)
+								stats.averageScoreDifference.difference,
+								gameTitle
 							)}. Play more games to create an average.
 						{:else}
 							{getScoreDifferenceMessage(
 								stats.averageScoreDifference.leader,
-								Math.round(stats.averageScoreDifference.difference)
+								stats.averageScoreDifference.difference,
+								gameTitle
 							)}.
 						{/if}
 					</p>

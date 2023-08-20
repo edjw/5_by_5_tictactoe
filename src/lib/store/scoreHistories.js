@@ -31,9 +31,9 @@ export const allFinalScores = persist(writable([initialScoresObject]), createInd
  * Resets the allFinalScores store to its initial state.
  */
 export function resetAllFinalScores() {
-    allFinalScores.set([initialScoresObject]);
+    const deepCopy = JSON.parse(JSON.stringify([initialScoresObject]));
+    allFinalScores.set(deepCopy);
 }
-
 
 /**
  * Updates or adds the final scores for a specific game.
