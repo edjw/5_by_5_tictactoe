@@ -38,7 +38,6 @@
 	<div
 		class="col-start-1 sm:col-start-2 lg:col-start-3 xl:col-start-4 col-span-full sm:col-span-10 lg:col-span-8 xl:col-span-6 grid grid-cols-5 justify-items-center items-center gap-2 w-[17rem] mx-auto"
 		id="gameGrid"
-		role="grid"
 		aria-roledescription="a 5 by 5 grid"
 	>
 		{#each $gridArray as squareData}
