@@ -19,6 +19,7 @@
 	export let fiveMultiplier = 3;
 	export let twoGoesForOFirstTurn = false;
 	export let title;
+	export let countEdgeOnlyTwos;
 
 	/**
 	 * @param {number} targetRow - The target row of the square to update
@@ -45,7 +46,10 @@
 		});
 
 		// Count the current scores
-		const currentPlayerScore = countAllLinesForPlayer($gridArray, $turn);
+
+		const currentPlayerScore = countAllLinesForPlayer($gridArray, $turn, {
+			countEdgeOnlyTwos: countEdgeOnlyTwos
+		});
 
 		// Update playerScores based on the current player and their score
 		playerScores.updatePlayerScore(

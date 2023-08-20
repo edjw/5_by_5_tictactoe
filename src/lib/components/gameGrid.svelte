@@ -13,6 +13,7 @@
 	export let fiveMultiplier;
 	export let twoGoesForOFirstTurn = false;
 	export let title;
+	export let countEdgeOnlyTwos;
 
 	let isOpen = false;
 
@@ -54,6 +55,7 @@
 					{fiveMultiplier}
 					{twoGoesForOFirstTurn}
 					{title}
+					{countEdgeOnlyTwos}
 				/>
 			{/each}
 		</div>

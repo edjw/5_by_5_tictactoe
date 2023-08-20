@@ -121,7 +121,10 @@ function isLineSubset(lineA, lineB) {
         return lineB.line.some((pointB) => pointA.row === pointB.row && pointA.col === pointB.col);
     });
 }
-export function countAllLinesForPlayer(gridArray, player) {
+export function countAllLinesForPlayer(gridArray, player, options = {}) {
+
+    const countEdgeOnlyTwos = options.countEdgeOnlyTwos || false;
+
     const matrix = createMatrix(gridArray);
     const lines = gatherLines(matrix, player);
     const filteredLines = filterLines(lines);
@@ -134,10 +137,21 @@ export function countAllLinesForPlayer(gridArray, player) {
         player: player
     };
 
+    function isOnEdge(square) {
+        return square.row === 1 || square.row === 5 || square.col === 1 || square.col === 5;
+    }
+
+
     filteredLines.forEach((line) => {
         switch (line.line.length) {
             case 2:
-                counts.twos++;
+                if (countEdgeOnlyTwos) {
+                    if (line.line.some(isOnEdge)) {
+                        counts.twos++;
+                    }
+                } else {
+                    counts.twos++;
+                }
                 break;
             case 3:
                 counts.threes++;
@@ -150,6 +164,8 @@ export function countAllLinesForPlayer(gridArray, player) {
                 break;
         }
     });
+
+
 
     return counts;
 }
