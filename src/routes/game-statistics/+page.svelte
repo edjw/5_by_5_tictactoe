@@ -22,26 +22,19 @@
 				<section class="border p-4 rounded shadow">
 					<h2 class="text-xl font-semibold mb-2">{gameTitle}</h2>
 					<p>
-						In the {$totalGamesForAll[gameTitle]}
-						{$totalGamesForAll[gameTitle] === 1 ? "game" : "games"} played so far,
-						{#if stats.averageScoreDifference.leader === "X"}
-							X {$totalGamesForAll[gameTitle] === 1 ? "beat" : "beats"} O by an average of {Math.round(
-								stats.averageScoreDifference.difference
-							)}
-							{Math.round(stats.averageScoreDifference.difference) === 1
-								? "point"
-								: "points"}{$totalGamesForAll[gameTitle] === 1
-								? ". Play more games to create an average."
-								: "."}
+						In the {$totalGamesForAll[gameTitle] === 1
+							? "only game"
+							: `${$totalGamesForAll[gameTitle]} games`} played so far,
+						{#if stats.averageScoreDifference.leader === "X" && $totalGamesForAll[gameTitle] === 1}
+							X beat O by 1 point. Play more games to create an average.
+						{:else if stats.averageScoreDifference.leader === "O" && $totalGamesForAll[gameTitle] === 1}
+							O beat X by 1 point. Play more games to create an average.
+						{:else if stats.averageScoreDifference.leader === "X"}
+							X beats O by an average of {Math.round(stats.averageScoreDifference.difference)}
+							{Math.round(stats.averageScoreDifference.difference) === 1 ? "point" : "points"}.
 						{:else if stats.averageScoreDifference.leader === "O"}
-							O {$totalGamesForAll[gameTitle] === 1 ? "beat" : "beats"} X by an average of {Math.round(
-								stats.averageScoreDifference.difference
-							)}
-							{Math.round(stats.averageScoreDifference.difference) === 1
-								? "point"
-								: "points"}{$totalGamesForAll[gameTitle] === 1
-								? ". Play more games to create an average."
-								: "."}
+							O beats X by an average of {Math.round(stats.averageScoreDifference.difference)}
+							{Math.round(stats.averageScoreDifference.difference) === 1 ? "point" : "points"}.
 						{:else}
 							{$totalGamesForAll[gameTitle] === 1
 								? "X and O drew. Play more games to create an average."
