@@ -7,6 +7,20 @@
 	$: {
 		hasStats = Object.values($totalGamesForAll).some((value) => value > 0);
 	}
+
+	function getScoreDifferenceMessage(leader, difference) {
+		if (leader === "X") {
+			return `X ${$totalGamesForAll[gameTitle] === 1 ? "beat" : "beats"} O by ${
+				difference === 1 ? "1 point" : `${Math.round(difference)} points`
+			}`;
+		} else if (leader === "O") {
+			return `O ${$totalGamesForAll[gameTitle] === 1 ? "beat" : "beats"} X by ${
+				difference === 1 ? "1 point" : `${Math.round(difference)} points`
+			}`;
+		} else {
+			return $totalGamesForAll[gameTitle] === 1 ? "X and O drew" : "On average, X and O draw";
+		}
+	}
 </script>
 
 <div class="col-span-full flex flex-col px-4 space-y-8">
@@ -25,20 +39,16 @@
 						In the {$totalGamesForAll[gameTitle] === 1
 							? "only game"
 							: `${$totalGamesForAll[gameTitle]} games`} played so far,
-						{#if stats.averageScoreDifference.leader === "X" && $totalGamesForAll[gameTitle] === 1}
-							X beat O by 1 point. Play more games to create an average.
-						{:else if stats.averageScoreDifference.leader === "O" && $totalGamesForAll[gameTitle] === 1}
-							O beat X by 1 point. Play more games to create an average.
-						{:else if stats.averageScoreDifference.leader === "X"}
-							X beats O by an average of {Math.round(stats.averageScoreDifference.difference)}
-							{Math.round(stats.averageScoreDifference.difference) === 1 ? "point" : "points"}.
-						{:else if stats.averageScoreDifference.leader === "O"}
-							O beats X by an average of {Math.round(stats.averageScoreDifference.difference)}
-							{Math.round(stats.averageScoreDifference.difference) === 1 ? "point" : "points"}.
+						{#if $totalGamesForAll[gameTitle] === 1}
+							{getScoreDifferenceMessage(
+								stats.averageScoreDifference.leader,
+								Math.round(stats.averageScoreDifference.difference)
+							)}. Play more games to create an average.
 						{:else}
-							{$totalGamesForAll[gameTitle] === 1
-								? "X and O drew. Play more games to create an average."
-								: "On average, X and O draw."}
+							{getScoreDifferenceMessage(
+								stats.averageScoreDifference.leader,
+								Math.round(stats.averageScoreDifference.difference)
+							)}.
 						{/if}
 					</p>
 
