@@ -14,47 +14,46 @@
 	export let countEdgeOnlyTwos = false;
 	export let title;
 
-	let isOpen = false;
+	let isFinalScoreDialogOpen = false;
 
 	$: if ($numberOfTurnsTaken === 25) {
-		isOpen = true;
+		isFinalScoreDialogOpen = true;
 	}
 
 	function handleCloseDialog() {
-		isOpen = false;
+		isFinalScoreDialogOpen = false;
 		resetGameState();
 	}
 </script>
 
 {#if $numberOfTurnsTaken === 25}
-	<FinalScoreDialog {isOpen} closeDialog={handleCloseDialog} />
+	<FinalScoreDialog isOpen={isFinalScoreDialogOpen} closeDialog={handleCloseDialog} />
 {/if}
 
 <div class="mb-2">
 	<p class="text-4xl md:text-5xl text-center">{$turn}</p>
 </div>
+
 <div class="grid grid-cols-12">
-	<section
-		class="col-start-1 sm:col-start-2 col-span-full sm:col-span-10 grid grid-cols-12 grid-rows-7 mt-8"
+	<div
+		class="col-start-1 sm:col-start-2 lg:col-start-3 xl:col-start-4 col-span-full sm:col-span-10 lg:col-span-8 xl:col-span-6 grid grid-cols-5 justify-items-center items-center gap-2 w-[17rem] mx-auto"
+		id="gameGrid"
+		role="grid"
+		aria-roledescription="a 5 by 5 grid"
 	>
-		<div
-			class="col-start-2 col-span-10 row-start-2 row-span-5 grid grid-cols-5 content-center justify-items-center min-w-[200px] max-w-[350px] mx-auto"
-			id="gameGrid"
-		>
-			{#each $gridArray as squareData}
-				<GridItem
-					{squareData}
-					{twoMultiplier}
-					{threeMultiplier}
-					{fourMultiplier}
-					{fiveMultiplier}
-					{twoGoesForOFirstTurn}
-					{title}
-					{countEdgeOnlyTwos}
-				/>
-			{/each}
-		</div>
-	</section>
+		{#each $gridArray as squareData}
+			<GridItem
+				{squareData}
+				{twoMultiplier}
+				{threeMultiplier}
+				{fourMultiplier}
+				{fiveMultiplier}
+				{twoGoesForOFirstTurn}
+				{title}
+				{countEdgeOnlyTwos}
+			/>
+		{/each}
+	</div>
 </div>
 
-<FillAllSquaresButton />
+<div aria-live="polite" class="sr-only" id="liveRegion" />

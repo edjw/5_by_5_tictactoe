@@ -1,5 +1,5 @@
 import { writable, derived } from 'svelte/store';
-import { persist, createIndexedDBStorage } from "@macfja/svelte-persistent-store";
+import { persist, createLocalStorage } from "@macfja/svelte-persistent-store";
 import { games } from './pages';
 
 const initialScoresObject = games.reduce((acc, game) => {
@@ -7,7 +7,7 @@ const initialScoresObject = games.reduce((acc, game) => {
     return acc;
 }, {});
 
-export const allFinalScores = persist(writable(initialScoresObject), createIndexedDBStorage(), "allFinalScores");
+export const allFinalScores = persist(writable(initialScoresObject), createLocalStorage(), "allFinalScores");
 
 /**
  * Resets the allFinalScores store to its initial state.
