@@ -3,7 +3,6 @@
 	import GridItem from "$lib/components/gridItem.svelte";
 	import { numberOfTurnsTaken } from "$lib/store/store";
 	import { gridArray, turn } from "$lib/store/store";
-	import { showGridLettersNumbers } from "$lib/store/settings";
 	import { resetGameState } from "$lib/functions/resetGameState";
 	import FillAllSquaresButton from "$lib/components/debugFillGridButton.svelte";
 
@@ -12,8 +11,8 @@
 	export let fourMultiplier;
 	export let fiveMultiplier;
 	export let twoGoesForOFirstTurn = false;
+	export let countEdgeOnlyTwos = false;
 	export let title;
-	export let countEdgeOnlyTwos;
 
 	let isOpen = false;
 
@@ -25,9 +24,6 @@
 		isOpen = false;
 		resetGameState();
 	}
-
-	let letters = ["A", "B", "C", "D", "E"];
-	let numbers = [5, 4, 3, 2, 1];
 </script>
 
 {#if $numberOfTurnsTaken === 25}
@@ -41,7 +37,6 @@
 	<section
 		class="col-start-1 sm:col-start-2 col-span-full sm:col-span-10 grid grid-cols-12 grid-rows-7 mt-8"
 	>
-		<!-- Main Grid -->
 		<div
 			class="col-start-2 col-span-10 row-start-2 row-span-5 grid grid-cols-5 content-center justify-items-center min-w-[200px] max-w-[350px] mx-auto"
 			id="gameGrid"
@@ -57,28 +52,6 @@
 					{title}
 					{countEdgeOnlyTwos}
 				/>
-			{/each}
-		</div>
-
-		<!-- Column Letters -->
-		<div
-			class="col-start-3 col-span-full sm:col-start-3 sm:col-span-8 row-start-7 grid grid-cols-5 content-center justify-items-center mt-2 min-w-[200px] max-w-[350px] {$showGridLettersNumbers
-				? ''
-				: 'invisible'}"
-		>
-			{#each letters as letter}
-				<span class="flex items-center justify-center w-full h-full text-xs">{letter}</span>
-			{/each}
-		</div>
-
-		<!-- Row Numbers -->
-		<div
-			class="col-start-1 row-start-2 row-span-5 grid grid-rows-5 content-center justify-items-center {$showGridLettersNumbers
-				? ''
-				: 'invisible'}"
-		>
-			{#each numbers as number}
-				<span class="flex items-center justify-center h-full text-xs">{number}</span>
 			{/each}
 		</div>
 	</section>

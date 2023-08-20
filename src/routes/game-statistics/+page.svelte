@@ -42,7 +42,6 @@
 		</p>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-			<!-- <pre>gameStats{JSON.stringify($gameStats)}</pre> -->
 			{#each Object.entries($gameStats) as [gameTitle, stats]}
 				<section class="border p-4 rounded shadow">
 					<h2 class="text-xl font-semibold mb-2">{gameTitle}</h2>
