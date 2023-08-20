@@ -29,6 +29,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Game statistics</title>
+</svelte:head>
+
 <div class="col-span-full flex flex-col px-4 space-y-8">
 	<div class="container mx-auto p-6">
 		<GameHeader title={"Game Statistics"} />
