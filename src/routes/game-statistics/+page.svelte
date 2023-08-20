@@ -16,7 +16,7 @@
 			This page is for statistics about the results for each of the game types you've played. It
 			only shows data about games played on this browser (Chrome/Firefox etc) on this device.
 		</p>
-		<p />
+
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
 			{#each Object.entries($gameStats) as [gameTitle, stats]}
 				<section class="border p-4 rounded shadow">
