@@ -65,11 +65,15 @@
 		canUndo.set(true); // Enable undo after a new move
 		numberOfTurnsTaken.update((value) => value + 1);
 
-		if ($numberOfTurnsTaken === 25) {
-			saveFinalScores(title, {
-				X: [$playerScores.X.score],
-				O: [$playerScores.O.score]
-			});
+		try {
+			if ($numberOfTurnsTaken === 25) {
+				saveFinalScores(title, {
+					X: $playerScores.X.score,
+					O: $playerScores.O.score
+				});
+			}
+		} catch (error) {
+			console.error("Failed to save final scores:", error);
 		}
 	}
 </script>
