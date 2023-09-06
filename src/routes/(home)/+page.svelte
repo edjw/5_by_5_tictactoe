@@ -11,7 +11,7 @@
 				<a href={game.link} data-sveltekit-reload class="underline font-semibold text-xl"
 					>{game.title}</a
 				>
-				<p>{@html game.description}</p>
+				<p class="my-0">{@html game.description}</p>
 			</section>
 		{/each}
 		<hr />
@@ -19,7 +19,7 @@
 			<a href="/game-statistics" data-sveltekit-reload class="underline font-semibold text-xl"
 				>Game statistics</a
 			>
-			<p>See a summary of statistics about each game</p>
+			<p class="my-0">See a summary of statistics about each game</p>
 		</section>
 	</nav>
 </div>

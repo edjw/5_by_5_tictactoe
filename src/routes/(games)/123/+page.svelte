@@ -5,7 +5,7 @@
 	import ResetGameButton from "$lib/components/resetGameButton.svelte";
 	import PlayerScoresTable from "$lib/components/playerScoresTable.svelte";
 	import UndoButton from "$lib/components/undoButton.svelte";
-	import { allowUndo } from "$lib/store/settings";
+	import { allowUndo, showCurrentScores } from "$lib/store/settings";
 	const title = "123";
 </script>
 
@@ -31,4 +31,6 @@
 	<li>3 points for a line of 5</li>
 </Rules>
 
-<PlayerScoresTable />
+{#if $showCurrentScores}
+	<PlayerScoresTable />
+{/if}
