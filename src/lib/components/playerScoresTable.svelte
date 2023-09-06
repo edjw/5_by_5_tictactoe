@@ -10,13 +10,13 @@
 			<p class="font-bold">
 				{player}
 			</p>
-			<p class="font-semibold">
+			<p class="font-semibold my-0">
 				{scores.score}
 				{scores.score === 1 ? "point" : "points"}
 			</p>
 			<div class="flex flex-col mt-4 col-span-5">
 				{#each Object.entries(scores.lines) as [lineLength, number]}
-					<p class={showTwos === false && lineLength === "twos" ? "hidden" : ""}>
+					<p class:hidden={showTwos === false && lineLength === "twos"} class="my-0">
 						{titleCase(lineLength)}: {number}
 					</p>
 				{/each}

@@ -31,7 +31,7 @@
 {/if}
 
 <div class="mb-2">
-	<p class="text-4xl md:text-5xl text-center">{$turn}</p>
+	<p class="text-4xl md:text-5xl text-center my-0 text-black">{$turn}</p>
 </div>
 
 <div class="grid grid-cols-12">
@@ -54,5 +54,9 @@
 		{/each}
 	</div>
 </div>
+
+{#if import.meta.env.DEV}
+	<FillAllSquaresButton />
+{/if}
 
 <div aria-live="polite" class="sr-only" id="liveRegion" />

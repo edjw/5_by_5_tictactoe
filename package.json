@@ -16,6 +16,8 @@
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
+		"@tailwindcss/forms": "^0.5.6",
+		"@tailwindcss/typography": "^0.5.10",
 		"autoprefixer": "^10.4.14",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
@@ -33,6 +35,10 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@macfja/svelte-persistent-store": "^2.4.0"
+		"@macfja/svelte-persistent-store": "^2.4.0",
+		"@supabase/auth-helpers-sveltekit": "^0.10.2",
+		"@supabase/auth-ui-shared": "^0.1.6",
+		"@supabase/auth-ui-svelte": "^0.2.4",
+		"@supabase/supabase-js": "^2.33.1"
 	}
 }

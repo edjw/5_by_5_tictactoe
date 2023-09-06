@@ -72,10 +72,10 @@
 		<section class="grid grid-cols-2 space-x-4 mt-8">
 			{#each Object.entries($playerScores) as [player, scores]}
 				<div class="flex flex-col">
-					<p class="font-semibold text-center text-xl">
+					<p class="font-semibold text-center text-xl my-0">
 						{player}
 					</p>
-					<p class="font-medium text-center">
+					<p class="font-medium text-center my-0">
 						{scores.score}
 						{scores.score === 1 ? "point" : "points"}
 					</p>

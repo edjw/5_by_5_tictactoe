@@ -14,8 +14,9 @@ const config = {
 			}
 		},
 	},
+	plugins: [
+		require('@tailwindcss/forms'), require('@tailwindcss/typography')]
 
-	plugins: []
 };
 
 module.exports = config;
