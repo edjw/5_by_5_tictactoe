@@ -1,9 +1,10 @@
 <script>
 	import { games } from "$lib/store/pages";
+	import SiteHeader from "$lib/components/siteHeader.svelte";
 </script>
 
 <div class="col-span-full flex flex-col px-4 space-y-8">
-	<h1 class="text-3xl">5-by-5 games</h1>
+	<SiteHeader />
 	<nav class="flex flex-col space-y-6">
 		{#each games as game}
 			<section>
