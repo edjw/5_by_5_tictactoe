@@ -17,9 +17,11 @@
 	let profileForm: HTMLFormElement;
 	let loading = false;
 	let fullName: string = profile?.full_name ?? "";
-	let username: string = profile?.username ?? "";
-	let website: string = profile?.website ?? "";
-	let avatarUrl: string = profile?.avatar_url ?? "";
+	let email = "";
+
+	if (session && session.user.email !== undefined) {
+		email = session.user.email;
+	}
 
 	const handleSubmit: SubmitFunction = () => {
 		loading = true;
@@ -47,22 +49,13 @@
 	>
 		<div class="flex flex-col max-w-xs">
 			<label class="text-sm" for="email">Email</label>
-			<input id="email" type="text" value={session.user.email} disabled />
+			<!-- <input id="email" type="text" value={form?.email ?? email} /> -->
+			<input id="email" name="email" type="text" bind:value={email} />
 		</div>
 
 		<div class="flex flex-col max-w-xs">
 			<label class="text-sm" for="fullName">Full Name</label>
 			<input id="fullName" name="fullName" type="text" value={form?.fullName ?? fullName} />
-		</div>
-
-		<div class="flex flex-col max-w-xs">
-			<label class="text-sm" for="username">Username</label>
-			<input id="username" name="username" type="text" value={form?.username ?? username} />
-		</div>
-
-		<div class="flex flex-col max-w-xs">
-			<label class="text-sm" for="website">Website</label>
-			<input id="website" name="website" type="url" value={form?.website ?? website} />
 		</div>
 
 		<div>
